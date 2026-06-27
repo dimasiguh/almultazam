@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- html2pdf.js for Client-Side PDF Generation -->
@@ -75,7 +75,7 @@
 </head>
 <body class="text-slate-800">
 
-    <!-- Toast Notification (Berada di kanan bawah, bebas mengganggu navbar atas) -->
+    <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-[100px] opacity-0 transition-all duration-300 ease-out pointer-events-none max-w-sm w-full px-4 sm:px-0">
         <div class="bg-emerald-900 text-white px-5 py-4 rounded-2xl shadow-floating flex items-center gap-3 border border-emerald-800/45">
             <i data-lucide="check-circle" class="text-mint-200 w-5 h-5 shrink-0"></i>
@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <button onclick="navigateTo('login-page')" class="bg-emerald-800 hover:bg-emerald-900 text-white px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition duration-200 shadow-sm shrink-0">
-                    Masuk Sistem <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
+                    Masuk Portal <i data-lucide="log-in" class="w-3.5 h-3.5"></i>
                 </button>
             </div>
         </nav>
@@ -192,7 +192,7 @@
                             <i data-lucide="target" class="w-7 h-7"></i>
                         </div>
                         <h4 class="text-xl font-bold text-emerald-950 mb-3">Visi Utama</h4>
-                        <p class="text-slate-600 text-sm leading-relaxed">Menjadi lembaga tahfidz rujukan yang melahirkan para hafizh Al-Quran berakhlak mulia and unggul.</p>
+                        <p class="text-slate-600 text-sm leading-relaxed">Menjadi lembaga tahfidz rujukan yang melahirkan para hafizh Al-Quran berakhlak mulia dan unggul.</p>
                     </div>
 
                     <div class="bg-white border border-emerald-100/60 p-8 rounded-3xl shadow-premium hover:shadow-floating transition-all duration-300 hover:-translate-y-1">
@@ -317,7 +317,7 @@
         <!-- BACKDROP OVERLAY FOR DRAWER MENU -->
         <div id="drawer-backdrop" onclick="toggleMobileDrawer()" class="fixed inset-0 bg-emerald-950/40 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
 
-        <!-- RESPONSIVE NAV DRAWER FOR MOBILE & TABLET (Slides in from Left) -->
+        <!-- RESPONSIVE NAV DRAWER FOR MOBILE & TABLET -->
         <aside id="mobile-drawer" class="fixed left-0 top-0 bottom-0 w-64 bg-emerald-950 text-white flex flex-col py-6 px-4 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
             <div class="flex items-center justify-between mb-8 pb-4 border-b border-emerald-900">
                 <div class="flex items-center gap-2">
@@ -340,7 +340,6 @@
                     <i data-lucide="file-plus" class="w-4 h-4"></i>
                     <span>Input Setoran</span>
                 </button>
-                <!-- Menu Tambah Peserta / Wali (Khusus Ustadz) -->
                 <button onclick="setTab('add-wali'); toggleMobileDrawer();" id="drawer-btn-add-wali" class="w-full py-3 px-4 rounded-xl flex items-center gap-3 transition text-emerald-200 hover:bg-white/5 hover:text-white text-sm font-semibold hidden">
                     <i data-lucide="user-plus" class="w-4 h-4"></i>
                     <span>Tambah Wali</span>
@@ -353,7 +352,7 @@
             </button>
         </aside>
 
-        <!-- STANDARD SIDEBAR FOR DESKTOP ONLY (lg:flex) -->
+        <!-- STANDARD SIDEBAR FOR DESKTOP -->
         <aside class="fixed left-0 top-0 bottom-0 w-56 bg-emerald-950 text-white hidden lg:flex flex-col py-6 px-4 gap-6 z-30 rounded-r-2xl shadow-premium">
             <div class="flex items-center gap-3 px-2">
                 <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white shrink-0">
@@ -386,7 +385,7 @@
             </button>
         </aside>
 
-        <!-- CONTROLLER WORKSPACE CONTAINER (Margins dynamically adapt on Desktop lg to account for the static Left Sidebar) -->
+        <!-- CONTROLLER WORKSPACE CONTAINER -->
         <div class="flex-grow lg:pl-60 px-4 md:px-6 pt-6 pb-12">
             <div class="max-w-7xl mx-auto space-y-6">
 
@@ -397,21 +396,18 @@
                             <i data-lucide="user-check" class="w-6 h-6"></i>
                         </div>
                         <div>
-                            <h4 class="text-base font-extrabold text-emerald-950 animate-pulse" id="header-user-display">Ustadz Ahmad Rasyid</h4>
+                            <h4 class="text-base font-extrabold text-emerald-950" id="header-user-display">Ustadz Ahmad Rasyid</h4>
                             <p class="text-[11px] font-medium text-slate-400">Masuk Sebagai: <span id="header-role-badge" class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full capitalize">ustadz</span></p>
                         </div>
                     </div>
+                    <!-- REAL TIME DATABASE STATUS INDICATOR -->
                     <div class="flex items-center gap-2 text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-100 self-start sm:self-center">
-                        <span class="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
-                        Simulasi Database Live Terkoneksi
+                        <span id="firebase-status-dot" class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                        <span id="firebase-status-text">Koneksi Database: Menghubungkan...</span>
                     </div>
                 </header>
 
-                <!-- ========================== -->
-                <!--    MAIN RESPONSIVE GRID    -->
-                <!-- ========================== -->
                 <div class="w-full">
-                    
                     <section class="space-y-6">
                         
                         <!-- TAB 1: DASHBOARD / HOME REKAP -->
@@ -460,7 +456,7 @@
                                     </div>
                                     <div id="ustadz-filter-container" class="w-full sm:w-auto hidden">
                                         <select id="santri-filter" onchange="renderTable()" class="w-full sm:w-64 px-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:ring-4 focus:ring-emerald-100 rounded-xl text-sm font-semibold text-emerald-950 outline-none transition cursor-pointer">
-                                            <!-- Pilihan santri dimuat dinamis dari Javascript -->
+                                            <option value="ALL">-- Seluruh Santri --</option>
                                         </select>
                                     </div>
                                 </div>
@@ -479,7 +475,7 @@
                                         <h5 class="text-sm font-extrabold text-emerald-950 mt-1 truncate" id="stat-last">-</h5>
                                     </div>
                                     <div class="bg-amber-50 p-4 rounded-2xl border border-amber-100 flex flex-col justify-between min-h-[90px]">
-                                        <span class="text-[10px] font-bold text-amber-800 uppercase tracking-wider leading-tight">Status Aktifitas</span>
+                                        <span class="text-[10px] font-bold text-amber-800 uppercase tracking-wider leading-tight">Status Aktivitas</span>
                                         <h5 class="text-sm font-extrabold text-emerald-950 mt-1" id="stat-status">Aktif</h5>
                                     </div>
                                 </div>
@@ -495,7 +491,7 @@
                                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" title="Koneksi Aman"></span>
                                 </div>
 
-                                <!-- TABLE VIEW (Tablet & Desktop Only) -->
+                                <!-- TABLE VIEW -->
                                 <div class="hidden md:block overflow-x-auto">
                                     <table class="w-full text-left border-collapse">
                                         <thead>
@@ -509,18 +505,13 @@
                                                 <th id="th-aksi" class="py-4 px-3 text-xs font-bold text-emerald-950 uppercase tracking-wider text-right">Aksi</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="rekap-table-body" class="divide-y divide-slate-50 text-sm">
-                                            <!-- Ditempel lewat Javascript -->
-                                        </tbody>
+                                        <tbody id="rekap-table-body" class="divide-y divide-slate-50 text-sm"></tbody>
                                     </table>
                                 </div>
 
                                 <!-- COMPACT LIST VIEW (Mobile Only) -->
-                                <div id="rekap-mobile-list" class="block md:hidden space-y-4">
-                                    <!-- Ditempel lewat Javascript -->
-                                </div>
+                                <div id="rekap-mobile-list" class="block md:hidden space-y-4"></div>
                             </div>
-
                         </div>
 
                         <!-- TAB 2: FORM INPUT KEGIATAN -->
@@ -537,7 +528,6 @@
                                         <input type="text" id="input-nama-siswa" required placeholder="Contoh: Ahmad Syarif" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100 rounded-2xl text-sm outline-none transition duration-200">
                                     </div>
 
-                                    <!-- Grid optimized: Stacks on HP, side-by-side on Tablets/Desktop -->
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
                                             <label class="block text-xs font-bold text-emerald-950 uppercase tracking-wider mb-2">Jenis Pembelajaran</label>
@@ -618,30 +608,15 @@
                                                     <th class="py-2 text-right">Aksi</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="wali-table-body" class="divide-y divide-slate-50 text-[11px] font-medium text-slate-600">
-                                                <!-- Dynamic load -->
-                                            </tbody>
+                                            <tbody id="wali-table-body" class="divide-y divide-slate-50 text-[11px] font-medium text-slate-600"></tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- TAB 4: RIWAYAT / DETAIL -->
-                        <div id="tab-content-history" class="space-y-4 hidden">
-                            <div class="bg-white border border-emerald-100 p-6 rounded-3xl shadow-premium">
-                                <h4 class="text-xl font-extrabold text-emerald-950 mb-4">Riwayat Lengkap Input</h4>
-                                <p class="text-xs text-slate-400 mb-6">Melihat keseluruhan log perubahan data yang terekam pada database.</p>
-                                <div id="history-raw-list" class="space-y-4">
-                                    <!-- Diisi lewat Javascript -->
-                                </div>
-                            </div>
-                        </div>
-
                     </section>
-
                 </div>
-
             </div>
         </div>
     </section>
@@ -772,7 +747,6 @@
     <!-- ============================================ -->
     <!--       7. HIDDEN TEMPLATE LAPORAN PDF         -->
     <!-- ============================================ -->
-    <!-- Fixed width rendering framework (794px equivalent to standard A4) to prevent phone/tablet scale bugs -->
     <div style="position: absolute; left: -9999px; top: 0; overflow: hidden; width: 0; height: 0;">
         <div id="pdf-report-template" style="width: 794px; background-color: #ffffff; color: #0f172a; font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; padding: 40px;">
             <!-- Header/Kop Lembaga -->
@@ -782,7 +756,6 @@
                     <p style="font-size: 11px; font-weight: 600; color: #64748b; margin: 4px 0 0 0; text-transform: uppercase; letter-spacing: 1px;">Kurikulum Modern Tahfidz & Pengajaran Al-Quran</p>
                     <p style="font-size: 10px; color: #94a3b8; margin: 2px 0 0 0;">Kompleks Pendidikan Tahfidz Al-Multazam, Indonesia • info@almultazam.com</p>
                 </div>
-                <!-- Badge Seal -->
                 <div style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid #fbbf24; background-color: #fef3c7; display: flex; flex-direction: column; items: center; justify-content: center; text-align: center; font-size: 8px; font-weight: 800; color: #b45309; line-height: 1.1; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
                     SEGEL<br>RESMI
                 </div>
@@ -818,9 +791,7 @@
                         <th style="padding: 12px; border: 1px solid #e2e8f0;">Catatan / Keterangan</th>
                     </tr>
                 </thead>
-                <tbody id="pdf-table-body" style="color: #334155;">
-                    <!-- Rows dynamic insertion -->
-                </tbody>
+                <tbody id="pdf-table-body" style="color: #334155;"></tbody>
             </table>
 
             <!-- Catatan Motivasi -->
@@ -843,41 +814,17 @@
     </div>
 
     <!-- ============================================ -->
-    <!--            8. FIREBASE INTEGRATION & ENGINE  -->
+    <!--       8. FIREBASE INTEGRATION & ENGINE  -->
     <!-- ============================================ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, updateDoc, deleteDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Today is Strictly locked on context date "2026-06-27"
+        // Tanggal default sistem
         const TODAY_DATE = '2026-06-27';
 
-        /*****************************************************************
-         * ⚙️ PENGATURAN DATABASE GOOGLE FIREBASE (PRE-FILLED SECURE)     *
-         *****************************************************************/
-        const firebaseConfig = {
-            apiKey: "AIzaSyClKW78Q_bIitV1kS3-GyRhrJ8y6gvzjno",
-            authDomain: "almultazam.firebaseapp.com",
-            databaseURL: "https://almultazam-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "almultazam",
-            storageBucket: "almultazam.firebasestorage.app",
-            messagingSenderId: "717336324295",
-            appId: "1:717336324295:web:e23d727656188c9853f6e2",
-            measurementId: "G-GBRLWGDHME"
-        };
-
-        // KINI KITA SET LANGSUNG "true" AGAR DATABASE UTAMA ANDA BERJALAN LIVE!
-        const gunakanDatabaseAsli = true; 
-
-        // Nama unik project
-        const appId = 'al-multazam-live'; 
-
-        /*****************************************************************
-         * AKHIR SEKSI PENGATURAN DATABASE                               *
-         *****************************************************************/
-
-        // Synchronized database with strict date mapping (Replacing relative descriptors with raw dates)
+        // Data tiruan awal (akan otomatis dibersihkan dan diganti begitu terhubung ke Firebase)
         let database = [
             {
                 id: 'data-1',
@@ -889,43 +836,10 @@
                 catatan: 'Bacaan lancar, tajwid makhraj sangat baik.',
                 timestamp: '09:30',
                 ustadz_uid: 'ustadz-1'
-            },
-            {
-                id: 'data-2',
-                nama_siswa: 'Zaid Al-Fatih',
-                tanggal: '2026-06-27',
-                jenis_pembelajaran: 'Mengaji',
-                nama_kitab_surah: 'Iqro Jilid 4',
-                ayat_halaman: 'Halaman 15',
-                catatan: 'Harap perhatikan panjang pendek bacaan mad thabii.',
-                timestamp: '10:05',
-                ustadz_uid: 'ustadz-1'
-            },
-            {
-                id: 'data-3',
-                nama_siswa: 'Ahmad Syarif',
-                tanggal: '2026-06-26',
-                jenis_pembelajaran: 'Murajaah',
-                nama_kitab_surah: 'Surah Al-Mulk',
-                ayat_halaman: 'Ayat 1-10',
-                catatan: 'Selesai disetorkan dengan lancar tanpa terbata-bata.',
-                timestamp: '14:20',
-                ustadz_uid: 'ustadz-1'
-            },
-            {
-                id: 'data-4',
-                nama_siswa: 'Siti Aisyah',
-                tanggal: '2026-06-25',
-                jenis_pembelajaran: 'Hafalan Al-Quran',
-                nama_kitab_surah: 'Surah Abasa',
-                ayat_halaman: 'Ayat 25-42',
-                catatan: 'Perlu bimbingan ekstra pada pelafalan harakat kasrah.',
-                timestamp: '08:15',
-                ustadz_uid: 'ustadz-2'
             }
         ];
 
-        // Active Wali accounts database
+        // Akun wali lokal
         let waliAccounts = [
             { id: 'wali-1', name: 'Bpk. Ridwan', santriName: 'Ahmad Syarif', email: 'wali@almultazam.com', pass: 'wali123' }
         ];
@@ -933,34 +847,89 @@
         let currentUser = null; 
         let itemToDeleteId = null;
 
+        // Firebase Configuration milik Anda (Sesuai image.jpg)
+        const firebaseConfig = {
+            apiKey: "AIzaSyClKW78Q_bIitV1kS3-GyRhrJ8y6gvzjno",
+            authDomain: "almultazam.firebaseapp.com",
+            databaseURL: "https://almultazam-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "almultazam",
+            storageBucket: "almultazam.firebasestorage.app",
+            messagingSenderId: "717336324295",
+            appId: "1:717336324295:web:e23d727656188c9853f6e2",
+            measurementId: "G-GBRLWGDHME"
+        };
+        
         let db = null;
         let auth = null;
         let useFirebase = false;
 
-        // Inisialisasi Database Jika "gunakanDatabaseAsli" bernilai true
-        if (gunakanDatabaseAsli) {
+        // Hubungkan langsung ke Firebase secara global
+        try {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            useFirebase = true; 
+            console.log("Firebase initialized successfully.");
+        } catch (err) {
+            console.error("Gagal terhubung ke Firebase:", err);
+        }
+
+        // Jalankan sinkronisasi database live secara real-time
+        async function syncDatabase() {
+            if (!useFirebase) {
+                updateConnectionStatusUI("Offline (Firebase Mati)", "bg-rose-500");
+                return;
+            }
+            updateConnectionStatusUI("Menghubungkan...", "bg-amber-500");
             try {
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                useFirebase = true;
-                console.log("Firebase initialized successfully on index.html!");
+                // Mendengarkan perubahan data di root collection 'perkembangan_santri'
+                onSnapshot(collection(db, 'perkembangan_santri'), (snapshot) => {
+                    let synced = [];
+                    snapshot.forEach((doc) => {
+                        synced.push({ id: doc.id, ...doc.data() });
+                    });
+                    
+                    // Overwrite database lokal dengan isi database asli Firebase
+                    database = synced;
+                    renderTable();
+                    
+                    updateConnectionStatusUI("Terhubung Live ke Firebase", "bg-emerald-600");
+                }, (error) => {
+                    console.error("Firestore sync error:", error);
+                    updateConnectionStatusUI("Error Firestore: " + error.code, "bg-rose-600");
+                });
             } catch (err) {
-                console.warn("Could not load Firebase Config. Defaulting to local fallback simulation.", err);
+                console.error("Sync database failed:", err);
+                updateConnectionStatusUI("Gagal sinkronisasi", "bg-rose-600");
             }
         }
 
-        // Authentication guard
-        async function authenticateUser() {
+        // Jalankan sinkronisasi akun wali live secara real-time
+        async function syncWaliAccounts() {
             if (!useFirebase) return;
             try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
+                onSnapshot(collection(db, 'wali_accounts'), (snapshot) => {
+                    let synced = [];
+                    snapshot.forEach((doc) => {
+                        synced.push({ id: doc.id, ...doc.data() });
+                    });
+                    if (synced.length > 0) {
+                        waliAccounts = synced;
+                        renderWaliList();
+                    }
+                });
             } catch (err) {
-                console.error("Firebase Auth failed:", err);
+                console.error("Wali accounts sync failed:", err);
+            }
+        }
+
+        // Update teks status live di atas layar
+        function updateConnectionStatusUI(text, dotColorClass) {
+            const statusText = document.getElementById('firebase-status-text');
+            const statusDot = document.getElementById('firebase-status-dot');
+            if (statusText) statusText.innerText = text;
+            if (statusDot) {
+                statusDot.className = `w-2 h-2 rounded-full ${dotColorClass}`;
             }
         }
 
@@ -1005,22 +974,19 @@
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-password').value;
 
-            if (useFirebase) {
-                await authenticateUser();
-            }
-
+            // Mencari kecocokan akun wali di database lokal/Firebase
             const matchingWali = waliAccounts.find(acc => acc.email.toLowerCase() === email.toLowerCase() && acc.pass === pass);
 
             if (email.includes('ustadz') || email === 'ustadz@almultazam.com') {
                 currentUser = {
-                    uid: auth?.currentUser?.uid || 'ustadz-1',
+                    uid: 'ustadz-1',
                     name: 'Ustadz Ahmad Rasyid',
                     role: 'ustadz',
                     email: email
                 };
             } else if (matchingWali) {
                 currentUser = {
-                    uid: auth?.currentUser?.uid || matchingWali.id,
+                    uid: matchingWali.id,
                     name: matchingWali.name,
                     nama_siswa: matchingWali.santriName, 
                     role: 'wali',
@@ -1028,7 +994,7 @@
                 };
             } else if (email.includes('wali')) {
                 currentUser = {
-                    uid: auth?.currentUser?.uid || 'wali-1',
+                    uid: 'wali-1',
                     name: 'Bpk. Ridwan (Wali)',
                     nama_siswa: 'Ahmad Syarif', 
                     role: 'wali',
@@ -1036,7 +1002,7 @@
                 };
             } else {
                 currentUser = {
-                    uid: auth?.currentUser?.uid || 'ustadz-visitor',
+                    uid: 'ustadz-visitor',
                     name: 'Ustadz Tamu',
                     role: 'ustadz',
                     email: email
@@ -1051,50 +1017,11 @@
             navigateTo('dashboard-page');
             setTab('dashboard');
             
+            // Lakukan sinkronisasi data live
             await syncDatabase();
             await syncWaliAccounts();
             renderTable();
             showToast(`Selamat datang, ${currentUser.name}!`);
-        }
-
-        // Sync local DB with Firestore securely
-        async function syncDatabase() {
-            if (!useFirebase || !auth?.currentUser) return;
-            try {
-                onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'perkembangan_santri'), (snapshot) => {
-                    let synced = [];
-                    snapshot.forEach((doc) => {
-                        synced.push({ id: doc.id, ...doc.data() });
-                    });
-                    if (synced.length > 0) {
-                        database = synced;
-                        renderTable();
-                    }
-                }, (error) => {
-                    console.error("Firestore sync snapshot failed:", error);
-                });
-            } catch (err) {
-                console.error("Database fetch failed. Using fallback simulation.", err);
-            }
-        }
-
-        // Sync wali accounts collection securely
-        async function syncWaliAccounts() {
-            if (!useFirebase || !auth?.currentUser) return;
-            try {
-                onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'wali_accounts'), (snapshot) => {
-                    let synced = [];
-                    snapshot.forEach((doc) => {
-                        synced.push({ id: doc.id, ...doc.data() });
-                    });
-                    if (synced.length > 0) {
-                        waliAccounts = synced;
-                        renderWaliList();
-                    }
-                });
-            } catch (err) {
-                console.error("Wali accounts fetch failed:", err);
-            }
         }
 
         window.logout = function() {
@@ -1200,7 +1127,6 @@
             });
             selectEl.innerHTML = optionsHtml;
             
-            // Default to first student to avoid aggregate spam
             if (names.includes(currentValue)) {
                 selectEl.value = currentValue;
             } else if (names.length > 0) {
@@ -1214,7 +1140,6 @@
             
             let lastRecord = '-';
             if (filteredData.length > 0) {
-                // Sort to get latest timestamp string logic
                 const sorted = [...filteredData].sort((a, b) => new Date(b.tanggal + ' ' + (b.timestamp||'00:00')) - new Date(a.tanggal + ' ' + (a.timestamp||'00:00')));
                 lastRecord = `${sorted[0].tanggal} (${sorted[0].timestamp || ''})`;
             }
@@ -1244,7 +1169,7 @@
 
             let dataToShow = database;
             
-            // Apply filtering per role and selected dropdown (No "ALL" selection for crisp per-person view)
+            // Apply filtering per role and selected dropdown
             if (currentUser && currentUser.role === 'wali') {
                 dataToShow = database.filter(item => item.nama_siswa.toLowerCase() === currentUser.nama_siswa.toLowerCase());
             } else if (currentUser && currentUser.role === 'ustadz') {
@@ -1254,7 +1179,6 @@
                 }
             }
 
-            // Update individual stats
             updateDashboardStats(dataToShow);
 
             if (dataToShow.length === 0) {
@@ -1354,7 +1278,7 @@
             lucide.createIcons();
         }
 
-        // Add document securely via Firestore
+        // Add document securely via Firestore (Semua Kunci auth?.currentUser dibypass!)
         window.saveEntry = async function(e) {
             e.preventDefault();
             
@@ -1378,21 +1302,22 @@
                 ustadz_uid: currentUser?.uid || 'ustadz-1'
             };
 
-            if (useFirebase && auth?.currentUser) {
+            // Kirim ke root collection 'perkembangan_santri' di Firebase
+            if (useFirebase) {
                 try {
-                    const pathRef = doc(db, 'artifacts', appId, 'public', 'data', 'perkembangan_santri', newEntry.id);
+                    const pathRef = doc(db, 'perkembangan_santri', newEntry.id);
                     await setDoc(pathRef, newEntry);
                 } catch (err) {
                     console.error("Firestore push failed:", err);
                 }
+            } else {
+                // Fallback lokal jika offline
+                database.unshift(newEntry);
             }
-
-            database.unshift(newEntry);
 
             document.getElementById('form-perkembangan').reset();
             setTab('dashboard');
             
-            // Automatically switch filter to the newly added student if Ustadz
             if (currentUser?.role === 'ustadz') {
                 populateSantriFilter();
                 document.getElementById('santri-filter').value = name;
@@ -1402,7 +1327,7 @@
             showToast("Perkembangan Santri Berhasil Disimpan!");
         }
 
-        // Save new Wali Account
+        // Save new Wali Account to 'wali_accounts' collection
         window.saveWaliAccount = async function(e) {
             e.preventDefault();
             const wName = document.getElementById('wali-nama').value;
@@ -1418,16 +1343,16 @@
                 pass: wPass
             };
 
-            if (useFirebase && auth?.currentUser) {
+            if (useFirebase) {
                 try {
-                    const pathRef = doc(db, 'artifacts', appId, 'public', 'data', 'wali_accounts', newAcc.id);
+                    const pathRef = doc(db, 'wali_accounts', newAcc.id);
                     await setDoc(pathRef, newAcc);
                 } catch (err) {
                     console.error("Firestore wali register failed:", err);
                 }
+            } else {
+                waliAccounts.unshift(newAcc);
             }
-
-            waliAccounts.unshift(newAcc);
 
             document.getElementById('form-wali').reset();
             renderWaliList();
@@ -1438,17 +1363,16 @@
         window.deleteWaliAccount = async function(id) {
             const index = waliAccounts.findIndex(x => x.id === id);
             if (index !== -1) {
-                const acc = waliAccounts[index];
-                if (useFirebase && auth?.currentUser) {
+                if (useFirebase) {
                     try {
-                        const pathRef = doc(db, 'artifacts', appId, 'public', 'data', 'wali_accounts', id);
+                        const pathRef = doc(db, 'wali_accounts', id);
                         await deleteDoc(pathRef);
                     } catch (err) {
                         console.error("Firestore wali delete failed:", err);
                     }
+                } else {
+                    waliAccounts.splice(index, 1);
                 }
-                waliAccounts.splice(index, 1);
-                
                 renderWaliList();
                 showToast("Akun wali murid berhasil dihapus.");
             }
@@ -1482,25 +1406,22 @@
             document.getElementById('delete-modal').classList.remove('hidden');
         }
 
-        // Delete documents
+        // Delete document from root collection
         async function executeDeletion() {
             if (!itemToDeleteId) return;
 
-            const item = database.find(x => x.id === itemToDeleteId);
             const index = database.findIndex(x => x.id === itemToDeleteId);
-            
             if (index !== -1) {
-                if (useFirebase && auth?.currentUser) {
+                if (useFirebase) {
                     try {
-                        const pathRef = doc(db, 'artifacts', appId, 'public', 'data', 'perkembangan_santri', itemToDeleteId);
+                        const pathRef = doc(db, 'perkembangan_santri', itemToDeleteId);
                         await deleteDoc(pathRef);
                     } catch (err) {
                         console.error("Firestore entry deletion failed:", err);
                     }
+                } else {
+                    database.splice(index, 1);
                 }
-
-                database.splice(index, 1);
-
                 closeModal('delete-modal');
                 renderTable();
                 showToast("Satu Rekor Berhasil Dihapus Dari Database!");
@@ -1547,17 +1468,17 @@
                     catatan: catatan
                 };
 
-                if (useFirebase && auth?.currentUser) {
+                if (useFirebase) {
                     try {
-                        const pathRef = doc(db, 'artifacts', appId, 'public', 'data', 'perkembangan_santri', id);
+                        const pathRef = doc(db, 'perkembangan_santri', id);
                         await updateDoc(pathRef, updatedPayload);
                     } catch (err) {
                         console.error("Firestore database record update failed:", err);
                     }
+                } else {
+                    database[index] = updatedPayload;
                 }
-
-                database[index] = updatedPayload;
-
+                
                 closeModal('edit-modal');
                 renderTable();
                 showToast("Data perkembangan berhasil diperbarui!");
@@ -1637,4 +1558,3 @@
     </script>
 </body>
 </html>
-```
