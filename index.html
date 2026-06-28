@@ -232,7 +232,7 @@
     </section>
 
     <!-- ============================================ -->
-    <!--           2. HALAMAN LOGIN (SINGLE)          -->
+    <!--          2. HALAMAN LOGIN (SINGLE)          -->
     <!-- ============================================ -->
     <section id="login-page" class="min-h-screen flex items-center justify-center bg-gradient-to-tr from-emerald-50 via-white to-mint-50/40 p-6 hidden">
         <div class="w-full max-w-md">
@@ -244,7 +244,7 @@
                 <div class="absolute -top-12 -right-12 w-28 h-28 bg-emerald-50 rounded-full"></div>
                 <div class="relative z-10 mb-8 text-center sm:text-left">
                     <h3 class="text-3xl font-extrabold text-emerald-950">Masuk Portal</h3>
-                    <p class="text-slate-500 text-sm mt-2">Gunakan akun Al-Multazam Anda untuk melanjutkan.</p>
+                    <p class="text-slate-500 text-sm mt-2">Pilih mode masuk dan masukkan akun Anda.</p>
                 </div>
 
                 <form id="login-form" onsubmit="handleLogin(event)" class="space-y-5 relative z-10">
@@ -276,15 +276,16 @@
                     </button>
                 </form>
 
+                <!-- KOTAK PILIHAN UJI COBA CEPAT (DENGAN EFEK MEMILIH FLAT MINIMALIST) -->
                 <div class="mt-8 pt-6 border-t border-slate-100 relative z-10">
-                    <span class="block text-center text-xs text-slate-400 font-semibold mb-4">Akses Uji Coba Cepat (Instan)</span>
+                    <span class="block text-center text-xs text-slate-400 font-semibold mb-4">Pilih Mode Pengguna Terlebih Dahulu:</span>
                     <div class="grid grid-cols-2 gap-3">
-                        <button onclick="quickFill('ustadz')" class="border border-emerald-100 hover:border-emerald-200 bg-emerald-50/50 hover:bg-emerald-50 text-emerald-900 text-xs font-bold py-3 px-2 rounded-xl flex flex-col items-center gap-1.5 transition">
-                            <i data-lucide="user-check" class="text-emerald-700 w-4 h-4"></i>
+                        <button id="btn-quick-ustadz" type="button" onclick="quickFill('ustadz')" class="border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-semibold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200">
+                            <i data-lucide="user-check" class="w-4 h-4"></i>
                             Mode Ustadz
                         </button>
-                        <button onclick="quickFill('wali')" class="border border-mint-100 hover:border-mint-200 bg-mint-50/50 hover:bg-mint-50 text-mint-900 text-xs font-bold py-3 px-2 rounded-xl flex flex-col items-center gap-1.5 transition">
-                            <i data-lucide="heart-handshake" class="text-mint-700 w-4 h-4"></i>
+                        <button id="btn-quick-wali" type="button" onclick="quickFill('wali')" class="border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-semibold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200">
+                            <i data-lucide="heart-handshake" class="w-4 h-4"></i>
                             Mode Wali Siswa
                         </button>
                     </div>
@@ -509,7 +510,7 @@
                                     </table>
                                 </div>
 
-                                <!-- COMPACT LIST VIEW (Mobile Only) -->
+                                <!-- COMPACT LIST VIEW -->
                                 <div id="rekap-mobile-list" class="block md:hidden space-y-4"></div>
                             </div>
                         </div>
@@ -712,7 +713,7 @@
     </div>
 
     <!-- ============================================ -->
-    <!--            6. MODAL LUPA KATA SANDI          -->
+    <!--     6. MODAL LUPA KATA SANDI (VIA WHATSAPP)  -->
     <!-- ============================================ -->
     <div id="forgot-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
         <div class="fixed inset-0 bg-emerald-950/40 backdrop-blur-sm transition-opacity"></div>
@@ -725,19 +726,21 @@
                 </button>
 
                 <div class="mb-4">
-                    <h3 class="text-xl font-bold text-emerald-950">Pemulihan Kata Sandi</h3>
-                    <p class="text-xs text-slate-400 mt-1">Sistem akan menyimulasikan email pemulihan akun.</p>
+                    <h3 class="text-xl font-bold text-emerald-950">Lupa Sandi Akun</h3>
+                    <p class="text-xs text-slate-400 mt-1">Sistem akan menyambungkan Anda ke WhatsApp Admin Al-Multazam untuk meminta ulang kata sandi Anda.</p>
                 </div>
 
                 <form onsubmit="handleForgotPassword(event)" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-bold text-emerald-950 uppercase tracking-wider mb-2">Alamat Email Anda</label>
-                        <input type="email" id="forgot-email" required placeholder="nama@almultazam.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100 rounded-2xl text-sm outline-none transition duration-200">
+                        <label class="block text-xs font-bold text-emerald-950 uppercase tracking-wider mb-2">Nomor HP/WA Anda yang Terdaftar</label>
+                        <input type="tel" id="forgot-wa" required placeholder="Contoh: 081234567890" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100 rounded-2xl text-sm outline-none transition duration-200">
                     </div>
 
                     <div class="flex gap-3 pt-2">
                         <button type="button" onclick="closeModal('forgot-modal')" class="w-1/3 border border-slate-200 hover:bg-slate-50 text-slate-700 py-3 rounded-xl text-sm font-semibold transition">Batal</button>
-                        <button type="submit" class="w-2/3 bg-emerald-800 hover:bg-emerald-900 text-white py-3 rounded-xl text-sm font-bold shadow-lg shadow-emerald-900/10 transition">Kirim Tautan Reset</button>
+                        <button type="submit" class="w-2/3 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl text-sm font-bold shadow-lg shadow-green-900/10 transition flex items-center justify-center gap-1.5">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i> Hubungi via WA
+                        </button>
                     </div>
                 </form>
             </div>
@@ -814,17 +817,17 @@
     </div>
 
     <!-- ============================================ -->
-    <!--       8. FIREBASE INTEGRATION & ENGINE  -->
+    <!--       8. FIREBASE INTEGRATION & ENGINE       -->
     <!-- ============================================ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, updateDoc, deleteDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Tanggal default sistem
         const TODAY_DATE = '2026-06-27';
 
-        // Data tiruan awal (akan otomatis dibersihkan dan diganti begitu terhubung ke Firebase)
+        // Data awal lokal (akan segera diganti oleh Firestore snapshot saat terhubung)
         let database = [
             {
                 id: 'data-1',
@@ -833,21 +836,22 @@
                 jenis_pembelajaran: 'Hafalan Al-Quran',
                 nama_kitab_surah: 'Surah An-Naba',
                 ayat_halaman: 'Ayat 1-20',
-                catatan: 'Bacaan lancar, tajwid makhraj sangat baik.',
+                catatan: 'Bacaan lancar, makhraj sangat baik.',
                 timestamp: '09:30',
                 ustadz_uid: 'ustadz-1'
             }
         ];
 
-        // Akun wali lokal
+        // Memuat akun wali lokal (otomatis disinkronisasikan ke Firebase)
         let waliAccounts = [
             { id: 'wali-1', name: 'Bpk. Ridwan', santriName: 'Ahmad Syarif', email: 'wali@almultazam.com', pass: 'wali123' }
         ];
 
         let currentUser = null; 
         let itemToDeleteId = null;
+        let selectedRole = null; 
 
-        // Firebase Configuration milik Anda (Sesuai image.jpg)
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyClKW78Q_bIitV1kS3-GyRhrJ8y6gvzjno",
             authDomain: "almultazam.firebaseapp.com",
@@ -863,7 +867,7 @@
         let auth = null;
         let useFirebase = false;
 
-        // Hubungkan langsung ke Firebase secara global
+        // Hubungkan langsung ke Firebase
         try {
             const app = initializeApp(firebaseConfig);
             db = getFirestore(app);
@@ -882,14 +886,13 @@
             }
             updateConnectionStatusUI("Menghubungkan...", "bg-amber-500");
             try {
-                // Mendengarkan perubahan data di root collection 'perkembangan_santri'
+                // Mendengarkan perubahan data perkembangan secara real-time
                 onSnapshot(collection(db, 'perkembangan_santri'), (snapshot) => {
                     let synced = [];
                     snapshot.forEach((doc) => {
                         synced.push({ id: doc.id, ...doc.data() });
                     });
                     
-                    // Overwrite database lokal dengan isi database asli Firebase
                     database = synced;
                     renderTable();
                     
@@ -915,15 +918,14 @@
                     });
                     if (synced.length > 0) {
                         waliAccounts = synced;
-                        renderWaliList();
                     }
+                    renderWaliList();
                 });
             } catch (err) {
                 console.error("Wali accounts sync failed:", err);
             }
         }
 
-        // Update teks status live di atas layar
         function updateConnectionStatusUI(text, dotColorClass) {
             const statusText = document.getElementById('firebase-status-text');
             const statusDot = document.getElementById('firebase-status-dot');
@@ -957,59 +959,124 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Quick login fill
+        // Pilihan Uji Coba Cepat (Flat Premium Design Feedback)
         window.quickFill = function(role) {
+            selectedRole = role;
+
+            const btnUstadz = document.getElementById('btn-quick-ustadz');
+            const btnWali = document.getElementById('btn-quick-wali');
+
+            btnUstadz.className = "border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-semibold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200";
+            btnWali.className = "border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-semibold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200";
+
             if (role === 'ustadz') {
-                document.getElementById('login-email').value = 'ustadz@almultazam.com';
-                document.getElementById('login-password').value = 'ustadz123';
+                btnUstadz.className = "border border-emerald-800 bg-emerald-800 text-white text-xs font-bold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 shadow-md shadow-emerald-900/10";
+                
+                const hasLoggedInBefore = localStorage.getItem('ustadz_has_logged_in') === 'true';
+                if (hasLoggedInBefore) {
+                    document.getElementById('login-email').value = localStorage.getItem('ustadz_saved_email') || 'ustadz@almultazam.com';
+                    document.getElementById('login-password').value = localStorage.getItem('ustadz_saved_password') || 'ustadz123';
+                    showToast("Mode Ustadz siap.");
+                } else {
+                    document.getElementById('login-email').value = 'ustadz@almultazam.com';
+                    document.getElementById('login-password').value = 'ustadz123';
+                    showToast("Email & Sandi Ustadz diisi otomatis.");
+                }
             } else if (role === 'wali') {
-                document.getElementById('login-email').value = 'wali@almultazam.com';
-                document.getElementById('login-password').value = 'wali123';
+                btnWali.className = "border border-emerald-800 bg-emerald-800 text-white text-xs font-bold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 shadow-md shadow-emerald-900/10";
+                
+                const hasLoggedInBefore = localStorage.getItem('wali_has_logged_in') === 'true';
+                if (hasLoggedInBefore) {
+                    document.getElementById('login-email').value = localStorage.getItem('wali_saved_email') || 'wali@almultazam.com';
+                    document.getElementById('login-password').value = localStorage.getItem('wali_saved_password') || 'wali123';
+                    showToast("Mode Wali Siswa siap.");
+                } else {
+                    document.getElementById('login-email').value = 'wali@almultazam.com';
+                    document.getElementById('login-password').value = 'wali123';
+                    showToast("Email & Sandi Wali diisi otomatis.");
+                }
             }
-            document.getElementById('login-form').dispatchEvent(new Event('submit'));
+            lucide.createIcons();
         }
 
         window.handleLogin = async function(e) {
             e.preventDefault();
-            const email = document.getElementById('login-email').value;
+            const email = document.getElementById('login-email').value.trim();
             const pass = document.getElementById('login-password').value;
 
-            // Mencari kecocokan akun wali di database lokal/Firebase
-            const matchingWali = waliAccounts.find(acc => acc.email.toLowerCase() === email.toLowerCase() && acc.pass === pass);
+            if (!selectedRole) {
+                if (email.toLowerCase().includes('ustadz')) {
+                    selectedRole = 'ustadz';
+                } else if (email.toLowerCase().includes('wali') || waliAccounts.some(acc => acc.email.toLowerCase() === email.toLowerCase())) {
+                    selectedRole = 'wali';
+                } else {
+                    showToast("Pilih salah satu mode masuk terlebih dahulu!");
+                    return;
+                }
+            }
 
-            if (email.includes('ustadz') || email === 'ustadz@almultazam.com') {
+            if (selectedRole === 'ustadz') {
+                const isUstadzEmail = email.toLowerCase().includes('ustadz');
+                if (!isUstadzEmail) {
+                    showToast("Akses ditolak: Bukan akun Ustadz!");
+                    return;
+                }
+
+                if (pass !== 'ustadz123') {
+                    showToast("Sandi Ustadz salah!");
+                    return;
+                }
+
                 currentUser = {
                     uid: 'ustadz-1',
                     name: 'Ustadz Ahmad Rasyid',
                     role: 'ustadz',
                     email: email
                 };
-            } else if (matchingWali) {
-                currentUser = {
-                    uid: matchingWali.id,
-                    name: matchingWali.name,
-                    nama_siswa: matchingWali.santriName, 
-                    role: 'wali',
-                    email: matchingWali.email
-                };
-            } else if (email.includes('wali')) {
-                currentUser = {
-                    uid: 'wali-1',
-                    name: 'Bpk. Ridwan (Wali)',
-                    nama_siswa: 'Ahmad Syarif', 
-                    role: 'wali',
-                    email: email
-                };
-            } else {
-                currentUser = {
-                    uid: 'ustadz-visitor',
-                    name: 'Ustadz Tamu',
-                    role: 'ustadz',
-                    email: email
-                };
+
+                localStorage.setItem('ustadz_has_logged_in', 'true');
+                localStorage.setItem('ustadz_saved_email', email);
+                localStorage.setItem('ustadz_saved_password', pass);
+
+            } else if (selectedRole === 'wali') {
+                const isUstadzEmail = email.toLowerCase().includes('ustadz');
+                if (isUstadzEmail) {
+                    showToast("Akun Ustadz tidak diperkenankan masuk ke Mode Wali!");
+                    return;
+                }
+
+                const matchingWali = waliAccounts.find(acc => acc.email.toLowerCase() === email.toLowerCase() && acc.pass === pass);
+
+                if (matchingWali) {
+                    currentUser = {
+                        uid: matchingWali.id,
+                        name: matchingWali.name,
+                        nama_siswa: matchingWali.santriName, 
+                        role: 'wali',
+                        email: matchingWali.email
+                    };
+
+                    localStorage.setItem('wali_has_logged_in', 'true');
+                    localStorage.setItem('wali_saved_email', email);
+                    localStorage.setItem('wali_saved_password', pass);
+                } else if (email === 'wali@almultazam.com' && pass === 'wali123') {
+                    currentUser = {
+                        uid: 'wali-1',
+                        name: 'Bpk. Ridwan (Wali)',
+                        nama_siswa: 'Ahmad Syarif', 
+                        role: 'wali',
+                        email: email
+                    };
+
+                    localStorage.setItem('wali_has_logged_in', 'true');
+                    localStorage.setItem('wali_saved_email', email);
+                    localStorage.setItem('wali_saved_password', pass);
+                } else {
+                    showToast("Sandi salah atau akun tidak ditemukan!");
+                    return;
+                }
             }
 
-            // Update mobile user initial
             document.getElementById('mobile-user-initial').innerText = currentUser.name.charAt(0).toUpperCase();
 
             updateProfileUI();
@@ -1017,17 +1084,25 @@
             navigateTo('dashboard-page');
             setTab('dashboard');
             
-            // Lakukan sinkronisasi data live
             await syncDatabase();
             await syncWaliAccounts();
             renderTable();
-            showToast(`Selamat datang, ${currentUser.name}!`);
+            showToast(`Masuk berhasil sebagai ${currentUser.name}`);
         }
 
         window.logout = function() {
             currentUser = null;
+            selectedRole = null;
+
+            document.getElementById('btn-quick-ustadz').className = "border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-semibold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200";
+            document.getElementById('btn-quick-wali').className = "border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-semibold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200";
+            
+            document.getElementById('login-email').value = '';
+            document.getElementById('login-password').value = '';
+
             navigateTo('landing-page');
-            showToast("Anda telah keluar dari sistem.");
+            showToast("Keluar berhasil.");
+            lucide.createIcons();
         }
 
         function updateProfileUI() {
@@ -1053,9 +1128,9 @@
             const btnAddWaliDrawer = document.getElementById('drawer-btn-add-wali');
 
             if (currentUser.role === 'wali') {
-                summaryWali.classList.remove('hidden');
-                summaryUstadz.classList.add('hidden');
-                filterContainer.classList.add('hidden');
+                summaryWali.className = "bg-white border border-emerald-100 p-6 rounded-3xl shadow-premium relative overflow-hidden block";
+                summaryUstadz.className = "bg-gradient-to-tr from-emerald-850 to-emerald-950 p-6 sm:p-8 rounded-3xl text-white shadow-floating relative overflow-hidden hidden";
+                filterContainer.className = "w-full sm:w-auto hidden";
                 
                 document.getElementById('wali-siswa-target').innerText = currentUser.nama_siswa;
                 document.getElementById('rekap-subtitle').innerText = `Data setoran & aktivitas: ${currentUser.nama_siswa}`;
@@ -1068,9 +1143,9 @@
 
                 document.getElementById('th-aksi').style.display = 'none';
             } else {
-                summaryWali.classList.add('hidden');
-                summaryUstadz.classList.remove('hidden');
-                filterContainer.classList.remove('hidden');
+                summaryWali.className = "bg-white border border-emerald-100 p-6 rounded-3xl shadow-premium relative overflow-hidden hidden";
+                summaryUstadz.className = "bg-gradient-to-tr from-emerald-850 to-emerald-950 p-6 sm:p-8 rounded-3xl text-white shadow-floating relative overflow-hidden block";
+                filterContainer.className = "w-full sm:w-auto block";
                 
                 document.getElementById('rekap-subtitle').innerText = "Data setoran & aktivitas santri yang dipilih.";
                 document.getElementById('statistik-subtitle').innerText = "Pantau perkembangan per individu.";
@@ -1094,7 +1169,6 @@
             const tabContent = document.getElementById(`tab-content-${tabName}`);
             if(tabContent) tabContent.classList.remove('hidden');
 
-            // Sync Desktop Nav Sidebar Active state
             ['dashboard', 'inputs', 'add-wali'].forEach(tab => {
                 const navBtn = document.getElementById(`nav-btn-${tab}`);
                 if (navBtn) {
@@ -1118,7 +1192,6 @@
             const selectEl = document.getElementById('santri-filter');
             const currentValue = selectEl.value;
             
-            // Get unique student names
             const names = [...new Set(database.map(item => item.nama_siswa))].sort();
             
             let optionsHtml = '';
@@ -1157,19 +1230,19 @@
             }
         }
 
-        // Render table
         window.renderTable = function() {
             if(currentUser?.role === 'ustadz') populateSantriFilter();
             
             const tbody = document.getElementById('rekap-table-body');
             const mobileList = document.getElementById('rekap-mobile-list');
             
+            if (!tbody || !mobileList) return;
+
             tbody.innerHTML = '';
             mobileList.innerHTML = '';
 
             let dataToShow = database;
             
-            // Apply filtering per role and selected dropdown
             if (currentUser && currentUser.role === 'wali') {
                 dataToShow = database.filter(item => item.nama_siswa.toLowerCase() === currentUser.nama_siswa.toLowerCase());
             } else if (currentUser && currentUser.role === 'ustadz') {
@@ -1255,9 +1328,9 @@
             }
         }
 
-        // Render registered wali accounts
         window.renderWaliList = function() {
             const body = document.getElementById('wali-table-body');
+            if (!body) return;
             body.innerHTML = '';
 
             waliAccounts.forEach(acc => {
@@ -1278,7 +1351,7 @@
             lucide.createIcons();
         }
 
-        // Add document securely via Firestore (Semua Kunci auth?.currentUser dibypass!)
+        // Add document securely via Firestore
         window.saveEntry = async function(e) {
             e.preventDefault();
             
@@ -1302,7 +1375,6 @@
                 ustadz_uid: currentUser?.uid || 'ustadz-1'
             };
 
-            // Kirim ke root collection 'perkembangan_santri' di Firebase
             if (useFirebase) {
                 try {
                     const pathRef = doc(db, 'perkembangan_santri', newEntry.id);
@@ -1311,7 +1383,6 @@
                     console.error("Firestore push failed:", err);
                 }
             } else {
-                // Fallback lokal jika offline
                 database.unshift(newEntry);
             }
 
@@ -1406,7 +1477,6 @@
             document.getElementById('delete-modal').classList.remove('hidden');
         }
 
-        // Delete document from root collection
         async function executeDeletion() {
             if (!itemToDeleteId) return;
 
@@ -1429,17 +1499,34 @@
             itemToDeleteId = null;
         }
 
+        // Tampilkan Modal Lupa Sandi yang Simpel
         window.openForgotPasswordModal = function() {
             document.getElementById('forgot-modal').classList.remove('hidden');
         }
 
+        // Eksekusi Pemulihan via WhatsApp Tanpa Rumit
         window.handleForgotPassword = function(e) {
             e.preventDefault();
-            const email = document.getElementById('forgot-email').value;
+            const waNumber = document.getElementById('forgot-wa').value.trim();
+
+            if (waNumber.length < 10) {
+                showToast("Mohon masukkan nomor WhatsApp terdaftar yang valid.");
+                return;
+            }
+
+            // Prefilled template WhatsApp profesional
+            const baseText = `Assalamu'alaikum Admin Lembaga Tahfidz Al-Multazam, saya ingin meminta ulang kata sandi akun Wali murid saya.\n\nNomor WA terdaftar: ${waNumber}`;
+            const encodedText = encodeURIComponent(baseText);
+            
+            // Redirect langsung ke WhatsApp Admin (bisa diubah ke nomor admin lembaga yang resmi)
+            const waLink = `https://wa.me/6281234567890?text=${encodedText}`;
 
             closeModal('forgot-modal');
-            showToast(`Tautan reset sandi disimulasikan ke: ${email}`);
-            document.getElementById('forgot-email').value = '';
+            showToast("Menghubungkan ke WhatsApp Admin...");
+            
+            // Buka di tab baru
+            window.open(waLink, '_blank');
+            document.getElementById('forgot-wa').value = '';
         }
 
         window.closeModal = function(modalId) {
