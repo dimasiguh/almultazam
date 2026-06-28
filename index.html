@@ -192,7 +192,7 @@
                             <i data-lucide="target" class="w-7 h-7"></i>
                         </div>
                         <h4 class="text-xl font-bold text-emerald-950 mb-3">Visi Utama</h4>
-                        <p class="text-slate-600 text-sm leading-relaxed">Menjadi lembaga tahfidz rujukan yang melahirkan para hafizh Al-Quran berakhlak mulia dan unggul.</p>
+                        <p class="text-slate-600 text-sm leading-relaxed">Menjadi lembaga tahfidz rujukan yang melahirkan para hafizh Al-Quran berakhlak mulia and unggul.</p>
                     </div>
 
                     <div class="bg-white border border-emerald-100/60 p-8 rounded-3xl shadow-premium hover:shadow-floating transition-all duration-300 hover:-translate-y-1">
@@ -232,7 +232,7 @@
     </section>
 
     <!-- ============================================ -->
-    <!--          2. HALAMAN LOGIN (SINGLE)          -->
+    <!--           2. HALAMAN LOGIN (SINGLE)          -->
     <!-- ============================================ -->
     <section id="login-page" class="min-h-screen flex items-center justify-center bg-gradient-to-tr from-emerald-50 via-white to-mint-50/40 p-6 hidden">
         <div class="w-full max-w-md">
@@ -249,12 +249,12 @@
 
                 <form id="login-form" onsubmit="handleLogin(event)" class="space-y-5 relative z-10">
                     <div>
-                        <label class="block text-xs font-bold text-emerald-950 uppercase tracking-wider mb-2">Alamat Email</label>
+                        <label class="block text-xs font-bold text-emerald-950 uppercase tracking-wider mb-2">Alamat Email / Nomor WA</label>
                         <div class="relative">
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
                                 <i data-lucide="mail" class="w-5 h-5"></i>
                             </span>
-                            <input type="email" id="login-email" required placeholder="nama@almultazam.com" class="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100 rounded-2xl text-sm outline-none transition">
+                            <input type="text" id="login-email" required placeholder="Email atau Nomor WhatsApp" class="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100 rounded-2xl text-sm outline-none transition">
                         </div>
                     </div>
 
@@ -582,9 +582,15 @@
                                         </div>
                                     </div>
 
-                                    <div>
-                                        <label class="block text-xs font-bold text-emerald-950 uppercase tracking-wider mb-2">Alamat Email Wali</label>
-                                        <input type="email" id="wali-email" required placeholder="wali@almultazam.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100 rounded-2xl text-sm outline-none transition duration-200">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-xs font-bold text-emerald-950 uppercase tracking-wider mb-2">Alamat Email Wali</label>
+                                            <input type="email" id="wali-email" required placeholder="wali@almultazam.com" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100 rounded-2xl text-sm outline-none transition duration-200">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-emerald-950 uppercase tracking-wider mb-2">Nomor WhatsApp Wali</label>
+                                            <input type="tel" id="wali-phone" required placeholder="Contoh: 081234567890" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100 rounded-2xl text-sm outline-none transition duration-200">
+                                        </div>
                                     </div>
 
                                     <div>
@@ -606,6 +612,7 @@
                                                     <th class="py-2">Wali</th>
                                                     <th class="py-2">Santri</th>
                                                     <th class="py-2">Email</th>
+                                                    <th class="py-2">Nomor WA</th>
                                                     <th class="py-2 text-right">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -844,14 +851,14 @@
 
         // Memuat akun wali lokal (otomatis disinkronisasikan ke Firebase)
         let waliAccounts = [
-            { id: 'wali-1', name: 'Bpk. Ridwan', santriName: 'Ahmad Syarif', email: 'wali@almultazam.com', pass: 'wali123' }
+            { id: 'wali-1', name: 'Bpk. Ridwan', santriName: 'Ahmad Syarif', email: 'wali@almultazam.com', phone: '081234567890', pass: 'wali123' }
         ];
 
         let currentUser = null; 
         let itemToDeleteId = null;
         let selectedRole = null; 
 
-        // Firebase Configuration
+        // Firebase Configuration (Sesuai gambar laptop Anda)
         const firebaseConfig = {
             apiKey: "AIzaSyClKW78Q_bIitV1kS3-GyRhrJ8y6gvzjno",
             authDomain: "almultazam.firebaseapp.com",
@@ -860,7 +867,7 @@
             storageBucket: "almultazam.firebasestorage.app",
             messagingSenderId: "717336324295",
             appId: "1:717336324295:web:e23d727656188c9853f6e2",
-            measurementId: "G-GBRLWGDHME"
+            measurementId: "G-GBRLWGDHME""
         };
         
         let db = null;
@@ -976,7 +983,7 @@
                 if (hasLoggedInBefore) {
                     document.getElementById('login-email').value = localStorage.getItem('ustadz_saved_email') || 'ustadz@almultazam.com';
                     document.getElementById('login-password').value = localStorage.getItem('ustadz_saved_password') || 'ustadz123';
-                    showToast("Mode Ustadz siap.");
+                    showToast("Mode Ustadz aktif.");
                 } else {
                     document.getElementById('login-email').value = 'ustadz@almultazam.com';
                     document.getElementById('login-password').value = 'ustadz123';
@@ -991,6 +998,7 @@
                     document.getElementById('login-password').value = localStorage.getItem('wali_saved_password') || 'wali123';
                     showToast("Mode Wali Siswa siap.");
                 } else {
+                    // Gunakan akun wali default bawaan/uji coba awal
                     document.getElementById('login-email').value = 'wali@almultazam.com';
                     document.getElementById('login-password').value = 'wali123';
                     showToast("Email & Sandi Wali diisi otomatis.");
@@ -1001,13 +1009,13 @@
 
         window.handleLogin = async function(e) {
             e.preventDefault();
-            const email = document.getElementById('login-email').value.trim();
+            const emailOrPhone = document.getElementById('login-email').value.trim();
             const pass = document.getElementById('login-password').value;
 
             if (!selectedRole) {
-                if (email.toLowerCase().includes('ustadz')) {
+                if (emailOrPhone.toLowerCase().includes('ustadz')) {
                     selectedRole = 'ustadz';
-                } else if (email.toLowerCase().includes('wali') || waliAccounts.some(acc => acc.email.toLowerCase() === email.toLowerCase())) {
+                } else if (emailOrPhone.toLowerCase().includes('wali') || waliAccounts.some(acc => acc.email.toLowerCase() === emailOrPhone.toLowerCase() || (acc.phone && acc.phone.trim() === emailOrPhone))) {
                     selectedRole = 'wali';
                 } else {
                     showToast("Pilih salah satu mode masuk terlebih dahulu!");
@@ -1016,7 +1024,7 @@
             }
 
             if (selectedRole === 'ustadz') {
-                const isUstadzEmail = email.toLowerCase().includes('ustadz');
+                const isUstadzEmail = emailOrPhone.toLowerCase().includes('ustadz');
                 if (!isUstadzEmail) {
                     showToast("Akses ditolak: Bukan akun Ustadz!");
                     return;
@@ -1031,21 +1039,25 @@
                     uid: 'ustadz-1',
                     name: 'Ustadz Ahmad Rasyid',
                     role: 'ustadz',
-                    email: email
+                    email: emailOrPhone
                 };
 
                 localStorage.setItem('ustadz_has_logged_in', 'true');
-                localStorage.setItem('ustadz_saved_email', email);
+                localStorage.setItem('ustadz_saved_email', emailOrPhone);
                 localStorage.setItem('ustadz_saved_password', pass);
 
             } else if (selectedRole === 'wali') {
-                const isUstadzEmail = email.toLowerCase().includes('ustadz');
+                const isUstadzEmail = emailOrPhone.toLowerCase().includes('ustadz');
                 if (isUstadzEmail) {
                     showToast("Akun Ustadz tidak diperkenankan masuk ke Mode Wali!");
                     return;
                 }
 
-                const matchingWali = waliAccounts.find(acc => acc.email.toLowerCase() === email.toLowerCase() && acc.pass === pass);
+                // Cocokkan akun wali menggunakan Email ATAU Nomor WhatsApp yang tersimpan
+                const matchingWali = waliAccounts.find(acc => 
+                    (acc.email.toLowerCase() === emailOrPhone.toLowerCase() || (acc.phone && acc.phone.trim() === emailOrPhone)) 
+                    && acc.pass === pass
+                );
 
                 if (matchingWali) {
                     currentUser = {
@@ -1057,19 +1069,19 @@
                     };
 
                     localStorage.setItem('wali_has_logged_in', 'true');
-                    localStorage.setItem('wali_saved_email', email);
+                    localStorage.setItem('wali_saved_email', matchingWali.email);
                     localStorage.setItem('wali_saved_password', pass);
-                } else if (email === 'wali@almultazam.com' && pass === 'wali123') {
+                } else if ((emailOrPhone === 'wali@almultazam.com' || emailOrPhone === '081234567890') && pass === 'wali123') {
                     currentUser = {
                         uid: 'wali-1',
                         name: 'Bpk. Ridwan (Wali)',
                         nama_siswa: 'Ahmad Syarif', 
                         role: 'wali',
-                        email: email
+                        email: 'wali@almultazam.com'
                     };
 
                     localStorage.setItem('wali_has_logged_in', 'true');
-                    localStorage.setItem('wali_saved_email', email);
+                    localStorage.setItem('wali_saved_email', 'wali@almultazam.com');
                     localStorage.setItem('wali_saved_password', pass);
                 } else {
                     showToast("Sandi salah atau akun tidak ditemukan!");
@@ -1169,6 +1181,7 @@
             const tabContent = document.getElementById(`tab-content-${tabName}`);
             if(tabContent) tabContent.classList.remove('hidden');
 
+            // Sync Desktop Nav Sidebar Active state
             ['dashboard', 'inputs', 'add-wali'].forEach(tab => {
                 const navBtn = document.getElementById(`nav-btn-${tab}`);
                 if (navBtn) {
@@ -1192,6 +1205,7 @@
             const selectEl = document.getElementById('santri-filter');
             const currentValue = selectEl.value;
             
+            // Dapatkan seluruh nama santri unik dari database
             const names = [...new Set(database.map(item => item.nama_siswa))].sort();
             
             let optionsHtml = '';
@@ -1230,6 +1244,7 @@
             }
         }
 
+        // Render table
         window.renderTable = function() {
             if(currentUser?.role === 'ustadz') populateSantriFilter();
             
@@ -1243,6 +1258,7 @@
 
             let dataToShow = database;
             
+            // Filter berdasarkan peran
             if (currentUser && currentUser.role === 'wali') {
                 dataToShow = database.filter(item => item.nama_siswa.toLowerCase() === currentUser.nama_siswa.toLowerCase());
             } else if (currentUser && currentUser.role === 'ustadz') {
@@ -1328,6 +1344,7 @@
             }
         }
 
+        // Render registered wali accounts
         window.renderWaliList = function() {
             const body = document.getElementById('wali-table-body');
             if (!body) return;
@@ -1340,6 +1357,7 @@
                     <td class="py-2 font-bold text-slate-800">${acc.name}</td>
                     <td class="py-2 text-emerald-700 font-semibold">${acc.santriName}</td>
                     <td class="py-2 text-slate-500 break-all">${acc.email}</td>
+                    <td class="py-2 text-slate-500">${acc.phone || '-'}</td>
                     <td class="py-2 text-right">
                         <button onclick="deleteWaliAccount('${acc.id}')" class="text-rose-600 hover:text-rose-800 font-semibold p-1 transition" title="Hapus Akun">
                             <i data-lucide="trash-2" class="w-3.5 h-3.5 inline"></i>
@@ -1375,6 +1393,7 @@
                 ustadz_uid: currentUser?.uid || 'ustadz-1'
             };
 
+            // Kirim ke root collection 'perkembangan_santri' di Firebase
             if (useFirebase) {
                 try {
                     const pathRef = doc(db, 'perkembangan_santri', newEntry.id);
@@ -1404,6 +1423,7 @@
             const wName = document.getElementById('wali-nama').value;
             const wSantri = document.getElementById('wali-santri').value;
             const wEmail = document.getElementById('wali-email').value;
+            const wPhone = document.getElementById('wali-phone').value.trim();
             const wPass = document.getElementById('wali-password').value;
 
             const newAcc = {
@@ -1411,6 +1431,7 @@
                 name: wName,
                 santriName: wSantri,
                 email: wEmail,
+                phone: wPhone,
                 pass: wPass
             };
 
@@ -1477,6 +1498,7 @@
             document.getElementById('delete-modal').classList.remove('hidden');
         }
 
+        // Delete document from root collection
         async function executeDeletion() {
             if (!itemToDeleteId) return;
 
